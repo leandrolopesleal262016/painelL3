@@ -26,28 +26,70 @@
     <div class="page-inner mt--5">
       <div class="row mt--2">
         <div class="col-md-6">
-          <div class="card full-height">
+          <div class="card card-stats card-round">
             <div class="card-body">
-              <div class="card-title">Monitoramento Host {{ip}}</div>
-              <div class="card-category">Analise em tempo real </div>
-              <div class="d-flex flex-wrap justify-content-around pb-2 pt-4">
+              <div class="card-title">Monitoramento Host &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ip}}</div></br>
+              <div class="card-category" >Dia &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label id="data"></label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                Hs:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label id="hora"></label>&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Tempereatura CPU&nbsp; <label id="temp">temp</label><label>&nbsp;°C</label>
+                
+                  <script>                                                                                    
+                   
+                
+                    // Função para formatar 1 em 01
+                    const zeroFill = n => {
+                      return ('0' + n).slice(-2);
+                    }
+
+                    // Cria intervalo
+                    const interval = setInterval(() => {                      
+
+                      // Pega o horário atual
+                      const now = new Date();
+
+                      // Formata a data conforme dd/mm/aaaa hh:ii:ss
+                      const data = zeroFill(now.getUTCDate()) + '/' + zeroFill((now.getMonth() + 1)) + '/' + now.getFullYear();
+                      const hora =  zeroFill(now.getHours()) + ':' + zeroFill(now.getMinutes()) + ':' + zeroFill(now.getSeconds());
+                     
+                      // Exibe na tela usando a div#data-hora
+                      document.getElementById('data').innerHTML = data;
+                      document.getElementById('hora').innerHTML = hora;
+                      
+                      atualiza();
+                      
+                    }, 1000);
+                  
+                  </script>
+         
+              </div>
+
+              
+              <!-- <div class="d-flex flex-wrap justify-content-around pb-2 pt-4">
+                
                 <div class="px-2 pb-2 pb-md-0 text-center">
                   <div id="circles-1"></div>
                   <h6 class="fw-bold mt-3 mb-0">Temperatura</h6>
                 </div>
+
                 <div class="px-2 pb-2 pb-md-0 text-center">
                   <div id="circles-2"></div>
                   <h6 class="fw-bold mt-3 mb-0">Espaço utilizado</h6>
                 </div>
+
                 <div class="px-2 pb-2 pb-md-0 text-center">
                   <div id="circles-3"></div>
                   <h6 class="fw-bold mt-3 mb-0">Uso de memória</h6>
                 </div>
-              </div>
+
+              </div> -->
             </div>
           </div>
         </div>
-        <div class="col-md-6">
+
+       
+            
+
+        <!-- <div class="col-md-6">
           <div class="card full-height">
             <div class="card-body">
               <div class="card-title">Frequencia de acionamentos</div>
@@ -70,687 +112,287 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
-      <div class="row">
-        <div class="col-md-8">
-          <div class="card">
-            <div class="card-header">
-              <div class="card-head-row">
-                <div class="card-title">User Statistics</div>
-                <div class="card-tools">
-                  <a href="#" class="btn btn-info btn-border btn-round btn-sm mr-2">
-                    <span class="btn-label">
-                      <i class="fa fa-pencil"></i>
-                    </span>
-                    Export
-                  </a>
-                  <a href="#" class="btn btn-info btn-border btn-round btn-sm">
-                    <span class="btn-label">
-                      <i class="fa fa-print"></i>
-                    </span>
-                    Print
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="card-body">
-              <div class="chart-container" style="min-height: 375px">
-                <canvas id="statisticsChart"></canvas>
-              </div>
-              <div id="myChartLegend"></div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card card-primary">
-            <div class="card-header">
-              <div class="card-title">Daily Sales</div>
-              <div class="card-category">March 25 - April 02</div>
-            </div>
-            <div class="card-body pb-0">
-              <div class="mb-4 mt-2">
-                <h1>$4,578.58</h1>
-              </div>
-              <div class="pull-in">
-                <canvas id="dailySalesChart"></canvas>
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-body pb-0">
-              <div class="h1 fw-bold float-right text-warning">+7%</div>
-              <h2 class="mb-2">213</h2>
-              <p class="text-muted">Transactions</p>
-              <div class="pull-in sparkline-fix">
-                <div id="lineChart"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row row-card-no-pd">
-        <div class="col-md-12">
-          <div class="card">
-            <div class="card-header">
-              <div class="card-head-row card-tools-still-right">
-                <h4 class="card-title">Users Geolocation</h4>
-                <div class="card-tools">
-                  <button class="btn btn-icon btn-link btn-primary btn-xs"><span class="fa fa-angle-down"></span></button>
-                  <button class="btn btn-icon btn-link btn-primary btn-xs btn-refresh-card"><span class="fa fa-sync-alt"></span></button>
-                  <button class="btn btn-icon btn-link btn-primary btn-xs"><span class="fa fa-times"></span></button>
-                </div>
-              </div>
-              <p class="card-category">
-              Map of the distribution of users around the world</p>
-            </div>
-            <div class="card-body">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="table-responsive table-hover table-sales">
-                    <table class="table">
-                      <tbody>
-                        <tr>
-                          <td>
-                            <div class="flag">
-                              <img src="/static/assets/img/flags/id.png" alt="indonesia">
-                            </div>
-                          </td>
-                          <td>Indonesia</td>
-                          <td class="text-right">
-                            2.320
-                          </td>
-                          <td class="text-right">
-                            42.18%
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div class="flag">
-                              <img src="/static/assets/img/flags/us.png" alt="united states">
-                            </div>
-                          </td>
-                          <td>USA</td>
-                          <td class="text-right">
-                            240
-                          </td>
-                          <td class="text-right">
-                            4.36%
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div class="flag">
-                              <img src="/static/assets/img/flags/au.png" alt="australia">
-                            </div>
-                          </td>
-                          <td>Australia</td>
-                          <td class="text-right">
-                            119
-                          </td>
-                          <td class="text-right">
-                            2.16%
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div class="flag">
-                              <img src="/static/assets/img/flags/ru.png" alt="russia">
-                            </div>
-                          </td>
-                          <td>Russia</td>
-                          <td class="text-right">
-                            1.081
-                          </td>
-                          <td class="text-right">
-                            19.65%
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div class="flag">
-                              <img src="/static/assets/img/flags/cn.png" alt="china">
-                            </div>
-                          </td>
-                          <td>China</td>
-                          <td class="text-right">
-                            1.100
-                          </td>
-                          <td class="text-right">
-                            20%
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div class="flag">
-                              <img src="/static/assets/img/flags/br.png" alt="brazil">
-                            </div>
-                          </td>
-                          <td>Brasil</td>
-                          <td class="text-right">
-                            640
-                          </td>
-                          <td class="text-right">
-                            11.63%
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="mapcontainer">
-                    <div id="map-example" class="vmap"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
+     
          <div class="row">
         <div class="col-md-4">
           <div class="card">
             <div class="card-header">
-              <div class="card-title">Acionamentos (pulso)</div>
+              <div class="card-title">Acionamento manual</div>
             </div>
             <div class="card-body pb-0">
-
-                <form action="reles" >
+               
                   <div class="d-flex" >                     
-                    <button type="submit" class="btn btn-success btn-xs" name="rele1" value="1" id="alert_demo_6">OUT 1</button>
+                    <button onclick="aciona_rele('rele1') "class="btn btn-info btn-xs" name="rele1" value="1" id="alert_demo_6">OUT 1</button>
                 <div class="flex-1 pt-1 ml-2">
-                  <rele1><h6 class="fw-bold mb-1">Rele1</label></h6><rele1>
+                  <h6 class="fw-bold mb-1">Rele1</label></h6>
                 </div> 
                 <div class="d-flex ml-auto align-items-center">
-                  <h3 class="text-info fw-bold">status</h3>
+                  <label class="switch">
+                    <input type="checkbox" id="switch_1" name="switch_1"  value="">
+                    <span class="slider round"></span>
+                  </label>  
                 </div>
               </div>
-              <div class="separator-dashed"></div>              
-                </form>
-            
-            <script>
-            
-            $('#alert_demo_6').click(function(e) {
-					swal("This modal will disappear soon!", {
-						buttons: false,
-						timer: 3000,
-					});
-				});
-        </script>
-            
-                
-               <form action="reles">
+              <div class="separator-dashed"></div>
+               
                  <div class="d-flex"> 
-                 <button type="submit" class="btn btn-success btn-xs" name="rele2" value="1">OUT 2</button>
+                 <button onclick="aciona_rele('rele2')" class="btn btn-info btn-xs" name="rele2" value="1">OUT 2</button>
                 <div class="flex-1 pt-1 ml-2">
                   <h6 class="fw-bold mb-1">Rele 2 </h6>
                 </div>
                 <div class="d-flex ml-auto align-items-center">
-                  <h3 class="text-info fw-bold">status</h3>
+                  <label class="switch">
+                    <input type="checkbox" id="switch_2" name="switch_2" value="">
+                    <span class="slider round"></span>
+                  </label>  
                 </div>
               </div>
               <div class="separator-dashed"></div>
-              </form>
+                            
               
-              <form action="reles">
               <div class="d-flex">
-                 <button type="submit" class="btn btn-success btn-xs" name="rele3" value="1">OUT 3</button>
+                 <button onclick="aciona_rele('rele3')" class="btn btn-info btn-xs" name="rele3" value="1">OUT 3</button>
                 <div class="flex-1 pt-1 ml-2">
                   <h6 class="fw-bold mb-1">Rele 3 </h6>
                 </div>
                 <div class="d-flex ml-auto align-items-center">
-                  <h3 class="text-info fw-bold">status</h3>
+                  <label class="switch">
+                    <input type="checkbox" id="switch_3" name="switch_3" value="">
+                    <span class="slider round"></span>
+                  </label>  
                 </div>
               </div>
               <div class="separator-dashed"></div>
-              </form>
+             
               
-              <form action="reles">
               <div class="d-flex">
-                 <button type="submit" class="btn btn-success btn-xs" name="rele4" value="1">OUT 4</button>
+                 <button onclick="aciona_rele('rele4')" class="btn btn-info btn-xs" name="rele4" value="1">OUT 4</button>
                 <div class="flex-1 pt-1 ml-2">
                   <h6 class="fw-bold mb-1">Rele 4 </h6>
                 </div>
                 <div class="d-flex ml-auto align-items-center">
-                  <h3 class="text-info fw-bold">status</h3>
+                  <label class="switch">
+                    <input type="checkbox" id="switch_4" name="switch_4" value="">
+                    <span class="slider round"></span>
+                  </label>  
                 </div>
               </div>
               <div class="separator-dashed"></div>
-              </form>
               
-              <form action="reles">
               <div class="d-flex">
-                 <button type="submit" class="btn btn-success btn-xs" name="rele5" value="1">OUT 5</button>
+                 <button onclick="aciona_rele('rele5')" class="btn btn-info btn-xs" name="rele5" value="1">OUT 5</button>
                 <div class="flex-1 pt-1 ml-2">
                   <h6 class="fw-bold mb-1">Rele 5 </h6>
                 </div>
                 <div class="d-flex ml-auto align-items-center">
-                  <h3 class="text-info fw-bold">status</h3>
+                  <label class="switch">
+                    <input type="checkbox" id="switch_5" name="switch_5" value="">
+                    <span class="slider round"></span>
+                  </label>  
                 </div>
               </div>
               <div class="separator-dashed"></div>
-              </form>
               
-              <form action="reles">
               <div class="d-flex">
-                 <button type="submit" class="btn btn-success btn-xs" name="rele6" value="1">OUT 6</button>
+                 <button onclick="aciona_rele('rele6')" class="btn btn-info btn-xs" name="rele6" value="1">OUT 6</button>
                 <div class="flex-1 pt-1 ml-2">
                   <h6 class="fw-bold mb-1">Rele 6 </h6>
                 </div>
                 <div class="d-flex ml-auto align-items-center">
-                  <h3 class="text-info fw-bold">status</h3>
+                  <label class="switch">
+                    <input type="checkbox" id="switch_6" name="switch_6" value="">
+                    <span class="slider round"></span>
+                  </label>  
                 </div>
               </div>
               <div class="separator-dashed"></div>
-              </form>
               
-              <form action="reles">
               <div class="d-flex">
-                 <button type="submit" class="btn btn-success btn-xs" name="rele7" value="1">OUT 7</button>
+                 <button onclick="aciona_rele('rele7')" class="btn btn-info btn-xs" name="rele7" value="1">OUT 7</button>
                 <div class="flex-1 pt-1 ml-2">
                   <h6 class="fw-bold mb-1">Rele 7 </h6>
                 </div>
                 <div class="d-flex ml-auto align-items-center">
-                  <h3 class="text-info fw-bold">status</h3>
+                  <label class="switch">
+                    <input type="checkbox" id="switch_7" name="switch_7" value="">
+                    <span class="slider round"></span>
+                  </label>  
                 </div>
               </div>
               <div class="separator-dashed"></div>
-              </form>
               
-              <form action="reles">
               <div class="d-flex">
-                 <button type="submit" class="btn btn-success btn-xs" name="rele8" value="1">OUT 8</button>
+                 <button onclick="aciona_rele('rele8')" class="btn btn-info btn-xs" name="rele8" value="1">OUT 8</button>
                 <div class="flex-1 pt-1 ml-2">
                   <h6 class="fw-bold mb-1">Rele 8 </h6>
                 </div>
                 <div class="d-flex ml-auto align-items-center">
-                  <h3 class="text-info fw-bold">status</h3>
+                  <label class="switch">
+                    <input type="checkbox" id="switch_8" name="switch_8" value="">
+                    <span class="slider round"></span>
+                  </label>  
                 </div>
               </div>
               <div class="separator-dashed"></div>
-              </form>
               
-              <form action="reles">
               <div class="d-flex">
-                 <button type="submit" class="btn btn-success btn-xs" name="rele9" value="1">OUT 9</button>
+                 <button onclick="aciona_rele('rele9')" class="btn btn-info btn-xs" name="rele9" value="1">OUT 9</button>
                 <div class="flex-1 pt-1 ml-2">
                   <h6 class="fw-bold mb-1"><label contenteditable="true">Rele 9 </label></h6>
                 </div>
                 <div class="d-flex ml-auto align-items-center">
-                  <h3 class="text-info fw-bold">status</h3>
+                  <label class="switch">
+                    <input type="checkbox" id="switch_9" name="switch_9" value="">
+                    <span class="slider round"></span>
+                  </label>  
                 </div>
               </div>
               <div class="separator-dashed"></div>
-              </form>
               
-              <form action="reles">
               <div class="d-flex">
-                 <button type="submit" class="btn btn-success btn-xs" name="rele10" value="1">OUT 10</button>
+                 <button onclick="aciona_rele('rele10')" class="btn btn-info btn-xs" name="rele10" value="1">OUT 10</button>
                 <div class="flex-1 pt-1 ml-2">
                   <h6 class="fw-bold mb-1">Rele 10 </h6>
                 </div>                              
                 <div class="d-flex ml-auto align-items-center">
-                  <h3 class="text-info fw-bold">status</h3>
+                  <label class="switch">
+                    <input type="checkbox" id="switch_10" name="switch_10" value="">
+                    <span class="slider round"></span>
+                  </label>  
                 </div>
               </div>
               <div class="separator-dashed"></div>
-              </form>
+
+                <div class="d-flex">
+                   <button onclick="aciona_rele('rele11')"class="btn btn-info btn-xs" name="rele11" value="1">OUT 11</button>
+                  <div class="flex-1 pt-1 ml-2">
+                    <h6 class="fw-bold mb-1">Rele 11 </h6>
+                  </div>                              
+                  <div class="d-flex ml-auto align-items-center">
+                    <label class="switch">
+                      <input type="checkbox" id="switch_11" name="switch_11" value="">
+                      <span class="slider round"></span>
+                    </label>  
+                  </div>
+                </div>
+                <div class="separator-dashed"></div>
+
+                  <div class="d-flex">
+                     <button onclick="aciona_rele('rele12')" class="btn btn-info btn-xs" name="rele12" value="1">OUT 12</button>
+                    <div class="flex-1 pt-1 ml-2">
+                      <h6 class="fw-bold mb-1">Rele 12 </h6>
+                    </div>                              
+                    <div class="d-flex ml-auto align-items-center">
+                      <label class="switch">
+                        <input type="checkbox" id="switch_12" name="switch_12" value="">
+                        <span class="slider round"></span>
+                      </label>  
+                    </div>
+                  </div>
+                  <div class="separator-dashed"></div>
+
+                    <div class="d-flex">
+                       <button onclick="aciona_rele('rele13')" class="btn btn-info btn-xs" name="rele13" value="1">OUT 13</button>
+                      <div class="flex-1 pt-1 ml-2">
+                        <h6 class="fw-bold mb-1">Rele 13 </h6>
+                      </div>                              
+                      <div class="d-flex ml-auto align-items-center">
+                        <label class="switch">
+                          <input type="checkbox" id="switch_13" name="switch_13" value="">
+                          <span class="slider round"></span>
+                        </label>                          
+                      </div>
+                    </div>
+                    <div class="separator-dashed"></div>
               
             </div>
           </div>
         </div>
 
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-header">
-              <div class="card-title">Acionamentos (retenção)</div>
-            </div>
-            <div class="card-body pb-0">
-
-              <div class="d-flex">
-                 <button class="btn btn-warning btn-xs">OUT 1</button>
-                <div class="flex-1 pt-1 ml-2">
-                  <rele11><h6 class="fw-bold mb-1">Rele1</label></h6><rele11>
-                </div>
-                <div class="d-flex ml-auto align-items-center">
-                  <h3 class="text-info fw-bold">status</h3>
-                </div>
-              </div>
-              <div class="separator-dashed"></div>
-
-              <div class="d-flex">
-                 <button class="btn btn-warning btn-xs">OUT 2</button>
-                <div class="flex-1 pt-1 ml-2">
-                  <h6 class="fw-bold mb-1">Rele 2 </h6>
-                </div>
-                <div class="d-flex ml-auto align-items-center">
-                  <h3 class="text-info fw-bold">status</h3>
-                </div>
-              </div>
-              <div class="separator-dashed"></div>
-
-              <div class="d-flex">
-                 <button class="btn btn-warning btn-xs">OUT 3</button>
-                <div class="flex-1 pt-1 ml-2">
-                  <h6 class="fw-bold mb-1">Rele 3 </h6>
-                </div>
-                <div class="d-flex ml-auto align-items-center">
-                  <h3 class="text-info fw-bold">status</h3>
-                </div>
-              </div>
-              <div class="separator-dashed"></div>
-
-              <div class="d-flex">
-                 <button class="btn btn-warning btn-xs">OUT 4</button>
-                <div class="flex-1 pt-1 ml-2">
-                  <h6 class="fw-bold mb-1">Rele 4 </h6>
-                </div>
-                <div class="d-flex ml-auto align-items-center">
-                  <h3 class="text-info fw-bold">status</h3>
-                </div>
-              </div>
-              <div class="separator-dashed"></div>
-
-              <div class="d-flex">
-                 <button class="btn btn-warning btn-xs">OUT 5</button>
-                <div class="flex-1 pt-1 ml-2">
-                  <h6 class="fw-bold mb-1">Rele 5 </h6>
-                </div>
-                <div class="d-flex ml-auto align-items-center">
-                  <h3 class="text-info fw-bold">status</h3>
-                </div>
-              </div>
-              <div class="separator-dashed"></div>
-
-              <div class="d-flex">
-                 <button class="btn btn-warning btn-xs">OUT 6</button>
-                <div class="flex-1 pt-1 ml-2">
-                  <h6 class="fw-bold mb-1">Rele 6 </h6>
-                </div>
-                <div class="d-flex ml-auto align-items-center">
-                  <h3 class="text-info fw-bold">status</h3>
-                </div>
-              </div>
-              <div class="separator-dashed"></div>
-
-              <div class="d-flex">
-                 <button class="btn btn-warning btn-xs">OUT 7</button>
-                <div class="flex-1 pt-1 ml-2">
-                  <h6 class="fw-bold mb-1">Rele 7 </h6>
-                </div>
-                <div class="d-flex ml-auto align-items-center">
-                  <h3 class="text-info fw-bold">status</h3>
-                </div>
-              </div>
-              <div class="separator-dashed"></div>
-
-              <div class="d-flex">
-                 <button class="btn btn-warning btn-xs">OUT 8</button>
-                <div class="flex-1 pt-1 ml-2">
-                  <h6 class="fw-bold mb-1">Rele 8 </h6>
-                </div>
-                <div class="d-flex ml-auto align-items-center">
-                  <h3 class="text-info fw-bold">status</h3>
-                </div>
-              </div>
-              <div class="separator-dashed"></div>
-
-              <div contenteditable="true" class="d-flex">
-                 <button class="btn btn-warning btn-xs">OUT 9</button>
-                <div class="flex-1 pt-1 ml-2">
-                  <h6 class="fw-bold mb-1">Rele 9 </h6>
-                </div>
-                <div class="d-flex ml-auto align-items-center">
-                  <h3 class="text-info fw-bold">status</h3>
-                </div>
-              </div>
-              <div class="separator-dashed"></div>
-
-              <div class="d-flex">
-                 <button class="btn btn-warning btn-xs">OUT 10</button>
-                <div class="flex-1 pt-1 ml-2">
-                  <h6 class="fw-bold mb-1">Rele 10 </h6>
-                </div>
-                <div class="d-flex ml-auto align-items-center">
-                  <h3 class="text-info fw-bold">status</h3>
-                </div>
-              </div>
-              <div class="separator-dashed"></div>
-            </div>
-          </div>
-        </div>
-
-
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-body">
-              <div class="card-title fw-mediumbold">Suggested People</div>
-              <div class="card-list">
-                <div class="item-list">
-                  <div class="avatar">
-                    <img src="/static/assets/img/eu.jpg" alt="..." class="avatar-img rounded-circle">
-                  </div>
-                  <div class="info-user ml-3">
-                    <div class="username">Leandro Leal</div>
-                    <div class="status">Graphic Designer</div>
-                  </div>
-
-                  <button class="btn btn-icon btn-round btn-success">
-                    <i class="fa fa-check"></i>
-                  </button>
-                </div>
-                <div class="item-list">
-                  <div class="avatar">
-                    <img src="/static/assets/img/chadengle.jpg" alt="..." class="avatar-img rounded-circle">
-                  </div>
-                  <div class="info-user ml-3">
-                    <div class="username">Chad</div>
-                    <div class="status">CEO Zeleaf</div>
-                  </div>
-                  <button class="btn btn-icon btn-primary btn-round btn-xs">
-                    <i class="fa fa-plus"></i>
-                  </button>
-                </div>
-                <div class="item-list">
-                  <div class="avatar">
-                    <img src="/static/assets/img/talha.jpg" alt="..." class="avatar-img rounded-circle">
-                  </div>
-                  <div class="info-user ml-3">
-                    <div class="username">Talha</div>
-                    <div class="status">Front End Designer</div>
-                  </div>
-                  <button class="btn btn-icon btn-primary btn-round btn-xs">
-                    <i class="fa fa-plus"></i>
-                  </button>
-                </div>
-                <div class="item-list">
-                  <div class="avatar">
-                    <img src="/static/assets/img/mlane.jpg" alt="..." class="avatar-img rounded-circle">
-                  </div>
-                  <div class="info-user ml-3">
-                    <div class="username">John Doe</div>
-                    <div class="status">Back End Developer</div>
-                  </div>
-                  <button class="btn btn-icon btn-primary btn-round btn-xs">
-                    <i class="fa fa-plus"></i>
-                  </button>
-                </div>
-                <div class="item-list">
-                  <div class="avatar">
-                    <img src="/static/assets/img/talha.jpg" alt="..." class="avatar-img rounded-circle">
-                  </div>
-                  <div class="info-user ml-3">
-                    <div class="username">Talha</div>
-                    <div class="status">Front End Designer</div>
-                  </div>
-                  <button class="btn btn-icon btn-primary btn-round btn-xs">
-                    <i class="fa fa-plus"></i>
-                  </button>
-                </div>
-                <div class="item-list">
-                  <div class="avatar">
-                    <img src="/static/assets/img/jm_denis.jpg" alt="..." class="avatar-img rounded-circle">
-                  </div>
-                  <div class="info-user ml-3">
-                    <div class="username">Jimmy Denis</div>
-                    <div class="status">Graphic Designer</div>
-                  </div>
-                  <button class="btn btn-icon btn-primary btn-round btn-xs">
-                    <i class="fa fa-plus"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card card-primary bg-primary-gradient">
-            <div class="card-body">
-              <h4 class="mt-3 b-b1 pb-2 mb-4 fw-bold">Active user right now</h4>
-              <h1 class="mb-4 fw-bold">17</h1>
-              <h4 class="mt-3 b-b1 pb-2 mb-5 fw-bold">Page view per minutes</h4>
-              <div id="activeUsersChart"></div>
-              <h4 class="mt-5 pb-3 mb-0 fw-bold">Top active pages</h4>
-              <ul class="list-unstyled">
-                <li class="d-flex justify-content-between pb-1 pt-1"><small>/product/readypro/index.html</small> <span>7</span></li>
-                <li class="d-flex justify-content-between pb-1 pt-1"><small>/product/atlantis/demo.html</small> <span>10</span></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="card full-height">
-            <div class="card-header">
-              <div class="card-title">Feed Activity</div>
-            </div>
-            <div class="card-body">
-              <ol class="activity-feed">
-                <li class="feed-item feed-item-secondary">
-                  <time class="date" datetime="9-25">Sep 25</time>
-                  <span class="text">Responded to need <a href="#">"Volunteer opportunity"</a></span>
-                </li>
-                <li class="feed-item feed-item-success">
-                  <time class="date" datetime="9-24">Sep 24</time>
-                  <span class="text">Added an interest <a href="#">"Volunteer Activities"</a></span>
-                </li>
-                <li class="feed-item feed-item-info">
-                  <time class="date" datetime="9-23">Sep 23</time>
-                  <span class="text">Joined the group <a href="single-group.php">"Boardsmanship Forum"</a></span>
-                </li>
-                <li class="feed-item feed-item-warning">
-                  <time class="date" datetime="9-21">Sep 21</time>
-                  <span class="text">Responded to need <a href="#">"In-Kind Opportunity"</a></span>
-                </li>
-                <li class="feed-item feed-item-danger">
-                  <time class="date" datetime="9-18">Sep 18</time>
-                  <span class="text">Created need <a href="#">"Volunteer Opportunity"</a></span>
-                </li>
-                <li class="feed-item">
-                  <time class="date" datetime="9-17">Sep 17</time>
-                  <span class="text">Attending the event <a href="single-event.php">"Some New Event"</a></span>
-                </li>
-              </ol>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="card full-height">
-            <div class="card-header">
-              <div class="card-head-row">
-                <div class="card-title">Support Tickets</div>
-                <div class="card-tools">
-                  <ul class="nav nav-pills nav-secondary nav-pills-no-bd nav-sm" id="pills-tab" role="tablist">
-                    <li class="nav-item">
-                      <a class="nav-link" id="pills-today" data-toggle="pill" href="#pills-today" role="tab" aria-selected="true">Today</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link active" id="pills-week" data-toggle="pill" href="#pills-week" role="tab" aria-selected="false">Week</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" id="pills-month" data-toggle="pill" href="#pills-month" role="tab" aria-selected="false">Month</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="card-body">
-              <div class="d-flex">
-                <div class="avatar avatar-online">
-                  <span class="avatar-title rounded-circle border border-white bg-info">J</span>
-                </div>
-                <div class="flex-1 ml-3 pt-1">
-                  <h6 class="text-uppercase fw-bold mb-1">Joko Subianto <span class="text-warning pl-3">pending</span></h6>
-                  <span class="text-muted">I am facing some trouble with my viewport. When i start my</span>
-                </div>
-                <div class="float-right pt-1">
-                  <small class="text-muted">8:40 PM</small>
-                </div>
-              </div>
-              <div class="separator-dashed"></div>
-              <div class="d-flex">
-                <div class="avatar avatar-offline">
-                  <span class="avatar-title rounded-circle border border-white bg-secondary">P</span>
-                </div>
-                <div class="flex-1 ml-3 pt-1">
-                  <h6 class="text-uppercase fw-bold mb-1">Prabowo Widodo <span class="text-success pl-3">open</span></h6>
-                  <span class="text-muted">I have some query regarding the license issue.</span>
-                </div>
-                <div class="float-right pt-1">
-                  <small class="text-muted">1 Day Ago</small>
-                </div>
-              </div>
-              <div class="separator-dashed"></div>
-              <div class="d-flex">
-                <div class="avatar avatar-away">
-                  <span class="avatar-title rounded-circle border border-white bg-danger">L</span>
-                </div>
-                <div class="flex-1 ml-3 pt-1">
-                  <h6 class="text-uppercase fw-bold mb-1">Lee Chong Wei <span class="text-muted pl-3">closed</span></h6>
-                  <span class="text-muted">Is there any update plan for RTL version near future?</span>
-                </div>
-                <div class="float-right pt-1">
-                  <small class="text-muted">2 Days Ago</small>
-                </div>
-              </div>
-              <div class="separator-dashed"></div>
-              <div class="d-flex">
-                <div class="avatar avatar-offline">
-                  <span class="avatar-title rounded-circle border border-white bg-secondary">P</span>
-                </div>
-                <div class="flex-1 ml-3 pt-1">
-                  <h6 class="text-uppercase fw-bold mb-1">Peter Parker <span class="text-success pl-3">open</span></h6>
-                  <span class="text-muted">I have some query regarding the license issue.</span>
-                </div>
-                <div class="float-right pt-1">
-                  <small class="text-muted">2 Day Ago</small>
-                </div>
-              </div>
-              <div class="separator-dashed"></div>
-              <div class="d-flex">
-                <div class="avatar avatar-away">
-                  <span class="avatar-title rounded-circle border border-white bg-danger">L</span>
-                </div>
-                <div class="flex-1 ml-3 pt-1">
-                  <h6 class="text-uppercase fw-bold mb-1">Logan Paul <span class="text-muted pl-3">closed</span></h6>
-                  <span class="text-muted">Is there any update plan for RTL version near future?</span>
-                </div>
-                <div class="float-right pt-1">
-                  <small class="text-muted">2 Days Ago</small>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
 
 {% endblock content %}
 
 {% block javascripts %}
+
+<script src="/static/assets/js/demo.js"></script>
+
+<script> // Monitor os switchs (on / off)
+                                                        
+  var checkbox1 = document.getElementById('switch_1');
+  var checkbox2 = document.getElementById('switch_2'); 
+  var checkbox3 = document.getElementById('switch_3'); 
+  var checkbox4 = document.getElementById('switch_4'); 
+  var checkbox5 = document.getElementById('switch_5'); 
+  var checkbox6 = document.getElementById('switch_6'); 
+  var checkbox7 = document.getElementById('switch_7'); 
+  var checkbox8 = document.getElementById('switch_8'); 
+  var checkbox9 = document.getElementById('switch_9'); 
+  var checkbox10 = document.getElementById('switch_10'); 
+  var checkbox11 = document.getElementById('switch_11'); 
+  var checkbox12 = document.getElementById('switch_12'); 
+  var checkbox13 = document.getElementById('switch_13');    
+    
+  checkbox1.addEventListener('change', (event) => {if (event.target.checked) { aciona_rele('switch1_on');} else {aciona_rele('switch1_off');}})
+  checkbox2.addEventListener('change', (event) => {if (event.target.checked) { aciona_rele('switch2_on');} else {aciona_rele('switch2_off');}})
+  checkbox3.addEventListener('change', (event) => {if (event.target.checked) { aciona_rele('switch3_on');} else {aciona_rele('switch3_off');}})
+  checkbox4.addEventListener('change', (event) => {if (event.target.checked) { aciona_rele('switch4_on');} else {aciona_rele('switch4_off');}})
+  checkbox5.addEventListener('change', (event) => {if (event.target.checked) { aciona_rele('switch5_on');} else {aciona_rele('switch5_off');}})
+  checkbox6.addEventListener('change', (event) => {if (event.target.checked) { aciona_rele('switch6_on');} else {aciona_rele('switch6_off');}})
+  checkbox7.addEventListener('change', (event) => {if (event.target.checked) { aciona_rele('switch7_on');} else {aciona_rele('switch7_off');}})
+  checkbox8.addEventListener('change', (event) => {if (event.target.checked) { aciona_rele('switch8_on');} else {aciona_rele('switch8_off');}})
+  checkbox9.addEventListener('change', (event) => {if (event.target.checked) { aciona_rele('switch9_on');} else {aciona_rele('switch9_off');}})
+  checkbox10.addEventListener('change', (event) => {if (event.target.checked) { aciona_rele('switch10_on');} else {aciona_rele('switch10_off');}})
+  checkbox11.addEventListener('change', (event) => {if (event.target.checked) { aciona_rele('switch11_on');} else {aciona_rele('switch11_off');}})
+  checkbox12.addEventListener('change', (event) => {if (event.target.checked) { aciona_rele('switch12_on');} else {aciona_rele('switch12_off');}})
+  checkbox13.addEventListener('change', (event) => {if (event.target.checked) { aciona_rele('switch13_on');} else {aciona_rele('switch13_off');}})
+  
+  </script>
+
+<script> // Envia pro python fazer os acionamentos dos reles
+  function aciona_rele(rele){
+    var xhr = new XMLHttpRequest(); 
+    xhr.open("GET", `/reles?` + rele, true);        
+    xhr.send();    
+  }
+</script>
+
+<script> // Seta o valor do checkbox caso não esteja setado
+  function toggle(checkbox,valor) {
+  var elm = document.getElementById(checkbox);                                              
+  if (valor != elm.checked) {                                                
+    elm.click();
+    }
+  }                                        
+</script>
+
+
+</script> -->
+
+<script> // Envia requisição pro Python e atualiza os dados na index                                                                                                    
+  function atualiza(){      
+        
+      var xhr = new XMLHttpRequest(); // Envia pro python atualizar os dados nas variaveis da session 
+      xhr.open("GET", `/atualiza`, true); 
+      xhr.onload = function(){
+      var dados = JSON.parse(this.responseText); // REcebe os dados e atualiza no front
+
+      var rele1 = dados.rele1;
+      var tmp = dados.temperatura;
+      // document.getElementById('switch_1').checked = rele1;
+      document.getElementById('temp').innerHTML = tmp; 
+                                                                                                                                              
+      }
+    xhr.send();                                                             
+                                                                                                    
+   }
+
+   
+    
+
+</script> 
 
    <script>
       window.onload = function(){
@@ -789,54 +431,55 @@
 
     </script>
 
-	<script src="/static/assets/js/demo.js"></script>
+	
 
 	<script>
-		Circles.create({
-			id:'circles-1',
-			radius:50,
-			value:{{temperatura}},
-			maxValue:90,
-			width:8,
-			text: "{{temperatura}}°C",
-			colors:['#f1f1f1', '#FF9E27'],
-			duration:100,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
 
-		Circles.create({
-			id:'circles-2',
-			radius:50,
-			value:{{espaco}},
-			maxValue:100,
-			width:8,
-			text: "{{espaco}}%" ,
-			colors:['#f1f1f1', '#2BB930'],
-			duration:100,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
+		// Circles.create({
+		// 	id:'tmp2',
+		// 	radius:50,
+		// 	value: '{{temperatura}}' ,
+		// 	maxValue:90,
+		// 	width:8,
+		// 	text: '{{temperatura}}',
+		// 	colors:['#f1f1f1', '#FF9E27'],
+		// 	duration:100,
+		// 	wrpClass:'circles-wrp',
+		// 	textClass:'circles-text',
+		// 	styleWrapper:true,
+		// 	styleText:true
+		// })
 
-		Circles.create({
-			id:'circles-3',
-			radius:50,
-			value:{{memoria}},
-			maxValue:100,
-			width:10,
-			text: "{{memoria}}%",
-			colors:['#f1f1f1', '#F25961'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
+		// Circles.create({
+		// 	id:'circles-2',
+		// 	radius:50,
+		// 	value:{{espaco}},
+		// 	maxValue:100,
+		// 	width:8,
+		// 	text: "{{espaco}}%" ,
+		// 	colors:['#f1f1f1', '#2BB930'],
+		// 	duration:100,
+		// 	wrpClass:'circles-wrp',
+		// 	textClass:'circles-text',
+		// 	styleWrapper:true,
+		// 	styleText:true
+		// })
 
+		// Circles.create({
+		// 	id:'circles-3',
+		// 	radius:50,
+		// 	value:{{memoria}},
+		// 	maxValue:100,
+		// 	width:10,
+		// 	text: "{{memoria}}%",
+		// 	colors:['#f1f1f1', '#F25961'],
+		// 	duration:400,
+		// 	wrpClass:'circles-wrp',
+		// 	textClass:'circles-text',
+		// 	styleWrapper:true,
+		// 	styleText:true
+		// })
+    
 		var totalIncomeChart = document.getElementById('totalIncomeChart').getContext('2d');
 
 		var mytotalIncomeChart = new Chart(totalIncomeChart, {
@@ -884,6 +527,7 @@
 			lineColor: '#ffa534',
 			fillColor: 'rgba(255, 165, 52, .14)'
 		});
+    
 	</script>
 
 {% endblock javascripts %}

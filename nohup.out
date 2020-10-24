@@ -1,0 +1,104 @@
+ * Serving Flask app "app" (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 338-515-063
+ * Serving Flask app "app" (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 338-515-063
+ * Serving Flask app "app" (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 338-515-063
+127.0.0.1 - - [09/Oct/2020 23:54:42] "[32mGET / HTTP/1.1[0m" 302 -
+127.0.0.1 - - [09/Oct/2020 23:54:42] "[37mGET /login.html HTTP/1.1[0m" 200 -
+127.0.0.1 - - [09/Oct/2020 23:55:11] "[32mPOST /login.html HTTP/1.1[0m" 302 -
+127.0.0.1 - - [09/Oct/2020 23:55:11] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [09/Oct/2020 23:55:12] "[33mGET /static/assets/img/eu.jpg HTTP/1.1[0m" 404 -
+temperatura cpu 60
+memoria 95
+Espaço utilizado 54
+Nome desta maquina 192.168.0.18 172.17.0.1
+XIO:  fatal IO error 11 (Resource temporarily unavailable) on X server ":0.0"
+      after 77 requests (77 known processed) with 0 events remaining.
+ * Serving Flask app "app" (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 264-218-154
+127.0.0.1 - - [10/Oct/2020 00:03:52] "[32mGET / HTTP/1.1[0m" 302 -
+127.0.0.1 - - [10/Oct/2020 00:03:52] "[37mGET /login.html HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:07:58] "[32mGET / HTTP/1.1[0m" 302 -
+127.0.0.1 - - [10/Oct/2020 00:07:59] "[37mGET /login.html HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:07:59] "[37mGET /static/assets/js/plugin/webfont/webfont.min.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:07:59] "[37mGET /static/assets/css/bootstrap.min.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:07:59] "[37mGET /static/assets/css/atlantis.min.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:07:59] "[37mGET /static/assets/css/demo.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:08:00] "[37mGET /static/assets/css/fonts.min.css HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:08:00] "[37mGET /static/assets/js/core/jquery.3.2.1.min.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:08:00] "[37mGET /static/assets/js/core/popper.min.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:08:00] "[37mGET /static/assets/js/core/bootstrap.min.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:08:01] "[37mGET /static/assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:08:02] "[37mGET /static/assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:08:02] "[37mGET /static/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:08:02] "[37mGET /static/assets/fonts/flaticon/Flaticon.woff HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:08:03] "[37mGET /static/assets/fonts/fontawesome/fa-solid-900.woff2 HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:08:03] "[37mGET /static/assets/fonts/fontawesome/fa-regular-400.woff2 HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:08:03] "[37mGET /static/assets/fonts/fontawesome/fa-brands-400.woff2 HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:08:03] "[37mGET /static/assets/fonts/simple-line-icons/Simple-Line-Icons.woff2?v=2.4.0 HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:08:03] "[37mGET /static/assets/js/plugin/chart.js/chart.min.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:08:03] "[37mGET /static/assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:08:03] "[37mGET /static/assets/js/plugin/chart-circle/circles.min.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:08:03] "[37mGET /static/assets/js/plugin/datatables/datatables.min.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:08:03] "[37mGET /static/assets/img/logo.svg HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:08:04] "[37mGET /static/assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:08:04] "[37mGET /static/assets/js/plugin/jqvmap/jquery.vmap.min.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:08:04] "[37mGET /static/assets/js/plugin/jqvmap/maps/jquery.vmap.world.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:08:04] "[37mGET /static/assets/js/plugin/sweetalert/sweetalert.min.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:08:04] "[37mGET /static/assets/js/atlantis.min.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:08:04] "[37mGET /static/assets/js/setting-demo.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:08:05] "[37mGET /static/assets/img/icon.ico HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:08:16] "[32mPOST /login.html HTTP/1.1[0m" 302 -
+127.0.0.1 - - [10/Oct/2020 00:08:16] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:08:17] "[37mGET /static/assets/img/jm_denis.jpg HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:08:17] "[37mGET /static/assets/img/mlane.jpg HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:08:17] "[37mGET /static/assets/js/demo.js HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:08:17] "[37mGET /static/assets/img/profile2.jpg HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:08:17] "[37mGET /static/assets/img/chadengle.jpg HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:08:17] "[37mGET /static/assets/img/talha.jpg HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:08:17] "[37mGET /static/assets/img/profile.jpg HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:08:17] "[37mGET /static/assets/img/flags/id.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:08:17] "[37mGET /static/assets/img/flags/us.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:08:17] "[37mGET /static/assets/img/flags/au.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:08:18] "[37mGET /static/assets/img/flags/ru.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:08:18] "[37mGET /static/assets/img/flags/cn.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:08:18] "[37mGET /static/assets/img/flags/br.png HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:08:18] "[33mGET /static/assets/img/eu.jpg HTTP/1.1[0m" 404 -
+127.0.0.1 - - [10/Oct/2020 00:08:40] "[32mGET /reles?rele13=1 HTTP/1.1[0m" 302 -
+127.0.0.1 - - [10/Oct/2020 00:08:41] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:08:42] "[33mGET /static/assets/img/eu.jpg HTTP/1.1[0m" 404 -
+127.0.0.1 - - [10/Oct/2020 00:23:57] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:24:00] "[33mGET /static/assets/img/eu.jpg HTTP/1.1[0m" 404 -
+127.0.0.1 - - [10/Oct/2020 00:31:25] "[37mGET / HTTP/1.1[0m" 200 -
+127.0.0.1 - - [10/Oct/2020 00:31:27] "[33mGET /static/assets/img/eu.jpg HTTP/1.1[0m" 404 -
+XIO:  fatal IO error 11 (Resource temporarily unavailable) on X server ":0.0"
+      after 77 requests (77 known processed) with 0 events remaining.

@@ -215,120 +215,123 @@ def reproduz_som():
     while pygame.mixer.music.get_busy():
         time.sleep(0.1)
 
-def reles(saidaA,saidaB):
+class Reles():
 
-    print("Acionando saidas dos reles")
+    def __init__(self):
 
+        self.saidaA = 0b00000000  # Zera as saidas do port A (saidas do rele 1 ao rele 8 )
+        self.saidaB = 0b00000000  # Zera as saidas do port B (saidas dos reles 9 e 10 e dos transistors 11,12,13)
+
+        bus.write_byte_data(MCP23017, 0x015, 0)  # Zera saidas do port B
+        bus.write_byte_data(MCP23017, 0x014, 0)  # Coloca todas as saidas do PORT A em 0
+   
+    def rele1_on(self):
+        self.saidaA = self.saidaA + 0b00000001  # aciona rele 1
+        bus.write_byte_data(MCP23017, 0x014, self.saidaA)
+
+    def rele1_off(self):        
+        self.saidaA = self.saidaA - 0b00000001  # desaciona rele 1
+        bus.write_byte_data(MCP23017, 0x014, self.saidaA)
+
+    def rele2_on(self):
+        self.saidaA = self.saidaA + 0b00000010  # aciona rele 2 
+        bus.write_byte_data(MCP23017, 0x014, self.saidaA)
+
+    def rele2_off(self):
+        self.saidaA = self.saidaA - 0b00000010  # aciona rele 2 
+        bus.write_byte_data(MCP23017, 0x014, self.saidaA)
     
-    saidaA = saidaA + 0b00000001  # aciona rele 1 (abre portão social)
-    bus.write_byte_data(MCP23017, 0x014, saidaA)
-    time.sleep(1)
-    saidaA = saidaA - 0b00000001  # aciona rele 1 (abre portão social)
-    bus.write_byte_data(MCP23017, 0x014, saidaA)
+    def rele3_on(self):
+        self.saidaA = self.saidaA + 0b00000100  # aciona rele 3 
+        bus.write_byte_data(MCP23017, 0x014, self.saidaA)
 
-    time.sleep(1)
-
-    saidaA = saidaA + 0b00000010  # aciona rele 2 (abre portão eclusa)
-    bus.write_byte_data(MCP23017, 0x014, saidaA)
-    time.sleep(1)
-    saidaA = saidaA - 0b00000010  # aciona rele 2 (abre portão eclusa)
-    bus.write_byte_data(MCP23017, 0x014, saidaA)
+    def rele3_off(self):
+        self.saidaA = self.saidaA - 0b00000100  # aciona rele 3 
+        bus.write_byte_data(MCP23017, 0x014, self.saidaA)
     
-    time.sleep(1)
-
-    saidaA = saidaA + 0b00000100  # aciona rele 3 (FOTO portão social)
-    bus.write_byte_data(MCP23017, 0x014, saidaA)
-    time.sleep(1)
-    saidaA = saidaA - 0b00000100  # aciona rele 3 (FOTO portão social)
-    bus.write_byte_data(MCP23017, 0x014, saidaA)
-
-    time.sleep(1)
-
-    saidaA = saidaA + 0b00001000  # aciona rele 4 (FOTO portão eclusa)
-    bus.write_byte_data(MCP23017, 0x014, saidaA)
-    time.sleep(1)
-    saidaA = saidaA - 0b00001000  # aciona rele 4 (FOTO portão eclusa)
-    bus.write_byte_data(MCP23017, 0x014, saidaA)
-
-    time.sleep(1)   
-
-    saidaA = saidaA + 0b00010000   # aciona rele 5
-    bus.write_byte_data(MCP23017, 0x014, saidaA)
-    time.sleep(1)
-    saidaA = saidaA - 0b00010000  
-    bus.write_byte_data(MCP23017, 0x014, saidaA)
-
-    time.sleep(1)
-
-    saidaA = saidaA + 0b00100000   # aciona rele 6
-    bus.write_byte_data(MCP23017, 0x014, saidaA)
-    time.sleep(1)
-    saidaA = saidaA - 0b00100000  
-    bus.write_byte_data(MCP23017, 0x014, saidaA)
-
-    time.sleep(1)
-
-    saidaA = saidaA + 0b01000000   # aciona rele 7
-    bus.write_byte_data(MCP23017, 0x014, saidaA)
-    time.sleep(1)
-    saidaA = saidaA - 0b01000000  
-    bus.write_byte_data(MCP23017, 0x014, saidaA)
-
-    time.sleep(1)
-
-    saidaA = saidaA + 0b10000000  # aciona rele 8
-    bus.write_byte_data(MCP23017, 0x014, saidaA)
-    time.sleep(1)
-    saidaA = saidaA - 0b10000000  
-    bus.write_byte_data(MCP23017, 0x014, saidaA)
-
-    time.sleep(1)
-
-    saidaB = saidaB + 0b00000001  # aciona rele 9 
-    bus.write_byte_data(MCP23017, 0x015, saidaB)
-    time.sleep(1)
-    saidaB = saidaB - 0b00000001  
-    bus.write_byte_data(MCP23017, 0x015, saidaB)
-
-    time.sleep(1)
-
-    saidaB = saidaB + 0b00000010  # aciona rele 10 
-    bus.write_byte_data(MCP23017, 0x015, saidaB)
-    time.sleep(1)
-    saidaB = saidaB - 0b00000010 
-    bus.write_byte_data(MCP23017, 0x015, saidaB)   
-
-    time.sleep(1)
-
-    saidaB = saidaB + 0b00000100  # liga LED AZUL saida GPB3
-    bus.write_byte_data(MCP23017, 0x015, saidaB)
-    time.sleep(1)
-    saidaB = saidaB - 0b00000100  
-    bus.write_byte_data(MCP23017, 0x015, saidaB)
-
-    time.sleep(1)
-
-    saidaB = saidaB + 0b00001000  # desliga LED VERMELHO saida GPB3
-    bus.write_byte_data(MCP23017, 0x015, saidaB)
-    time.sleep(1)
-    saidaB = saidaB - 0b00001000  
-    bus.write_byte_data(MCP23017, 0x015, saidaB)
-
-    time.sleep(1)
-
-    saidaB = saidaB + 0b00010000  # liga cooler
-    bus.write_byte_data(MCP23017, 0x015, saidaB)
-    time.sleep(1)
-    saidaB = saidaB - 0b00010000  
-    bus.write_byte_data(MCP23017, 0x015, saidaB)
+    def rele4_on(self):
+        self.saidaA = self.saidaA + 0b00001000  # aciona rele 4 
+        bus.write_byte_data(MCP23017, 0x014, self.saidaA)
+        
+    def rele4_off(self):
+        self.saidaA = self.saidaA - 0b00001000  # aciona rele 4 
+        bus.write_byte_data(MCP23017, 0x014, self.saidaA)
+       
+    def rele5_on(self):
+        self.saidaA = self.saidaA + 0b00010000   # aciona rele 5
+        bus.write_byte_data(MCP23017, 0x014, self.saidaA)
+    
+    def rele5_off(self):
+        self.saidaA = self.saidaA - 0b00010000  
+        bus.write_byte_data(MCP23017, 0x014, self.saidaA)
+    
+    def rele6_on(self):
+        self.saidaA = self.saidaA + 0b00100000   # aciona rele 6
+        bus.write_byte_data(MCP23017, 0x014, self.saidaA)
+    
+    def rele6_off(self):
+        self.saidaA = self.saidaA - 0b00100000  
+        bus.write_byte_data(MCP23017, 0x014, self.saidaA)
+    
+    def rele7_on(self):
+        self.saidaA = self.saidaA + 0b01000000   # aciona rele 7
+        bus.write_byte_data(MCP23017, 0x014, self.saidaA)
+    
+    def rele7_off(self):
+        self.saidaA = self.saidaA - 0b01000000  
+        bus.write_byte_data(MCP23017, 0x014, self.saidaA)
+    
+    def rele8_on(self):
+        self.saidaA = self.saidaA + 0b10000000  # aciona rele 8
+        bus.write_byte_data(MCP23017, 0x014, self.saidaA)
+    
+    def rele8_off(self):
+        self.saidaA = self.saidaA - 0b10000000  
+        bus.write_byte_data(MCP23017, 0x014, self.saidaA)
+    
+    def rele9_on(self):
+        self.saidaB = self.saidaB + 0b00000001  # aciona rele 9 
+        bus.write_byte_data(MCP23017, 0x015, self.saidaB)
+    
+    def rele9_off(self):
+        self.saidaB = self.saidaB - 0b00000001  
+        bus.write_byte_data(MCP23017, 0x015, self.saidaB)
+    
+    def rele10_on(self):
+        self.saidaB = self.saidaB + 0b00000010  # aciona rele 10 
+        bus.write_byte_data(MCP23017, 0x015, self.saidaB)
+    
+    def rele10_off(self):
+        self.saidaB = self.saidaB - 0b00000010 
+        bus.write_byte_data(MCP23017, 0x015, self.saidaB)
+    
+    def rele11_on(self):
+        self.saidaB = self.saidaB + 0b00000100  # liga LED AZUL saida GPB3
+        bus.write_byte_data(MCP23017, 0x015, self.saidaB)
+    
+    def rele11_off(self):
+        self.saidaB = self.saidaB - 0b00000100  
+        bus.write_byte_data(MCP23017, 0x015, self.saidaB)
+    
+    def rele12_on(self):
+        self.saidaB = self.saidaB + 0b00001000  # desliga LED VERMELHO saida GPB3
+        bus.write_byte_data(MCP23017, 0x015, self.saidaB)
+    
+    def rele12_off(self):
+        self.saidaB = self.saidaB - 0b00001000  
+        bus.write_byte_data(MCP23017, 0x015, self.saidaB)
+    
+    def rele13_on(self):
+        self.saidaB = self.saidaB + 0b00010000  # liga cooler
+        bus.write_byte_data(MCP23017, 0x015, self.saidaB)
+    
+    def rele13_off(self):
+        self.saidaB = self.saidaB - 0b00010000  
+        bus.write_byte_data(MCP23017, 0x015, self.saidaB)
      
 
-    time.sleep(1)
+   
 
-    saidaA = 0b00000000  # Zera as saidas do port A (saidas do rele 1 ao rele 8 )
-    saidaB = 0b00000000  # Zera as saidas do port B (saidas dos reles 9 e 10 e dos transistors 11,12,13)
+    
 
-    bus.write_byte_data(MCP23017, 0x015, 0)  # Zera saidas do port B
-    bus.write_byte_data(MCP23017, 0x014, 0)  # Coloca todas as saidas do PORT A em 0
 
-reles(saidaA,saidaB)

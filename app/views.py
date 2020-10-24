@@ -27,6 +27,7 @@ import spidev
 import os  # Permite a execução de comandos do sistema operacional dentro do script Ex.: os.system('sudo reboot now')
 import threading  # Modulo superior Para executar as threads
 
+from app.biblioteca_SEA import Reles
 
 GPIO.setwarnings(False)  # desabilita mensagens de aviso
 GPIO.setmode(GPIO.BCM)  # Modo de endereço dos pinos BCM
@@ -40,6 +41,17 @@ MCP23017 = 0X20  # Endereço do módulo de saidas dos reles
 MCP3008 = 0
 bus.write_byte_data(MCP23017, 0x00, 0x00)  # defina todo GPA como saida 0x00
 bus.write_byte_data(MCP23017, 0x01, 0x00)  # defina todo GPB como saida 0x01
+
+rele = Reles()
+
+# class Inicia_ports:
+
+#     def __init__(self):
+                
+#         self.saidaA = 0b00000000  # Zera as saidas do port A (saidas do rele 1 ao rele 8 )
+#         self.saidaB = 0b00000000  # Zera as saidas do port B (saidas dos reles 9 e 10 e dos transistors 11,12,13)
+
+# inicia = Inicia_ports()
 
 # provide login manager with load_user callback
 @lm.user_loader
@@ -138,10 +150,21 @@ def login():
 
     return render_template( 'pages/login.html', form=form, msg=msg )
 
-@app.route('/nomes_reles',methods=['POST'])
-def nomes_reles():
-    nomes = request.form
-    print(nomes)
+
+def temperatura():
+    temp = os.popen("vcgencmd measure_temp").readline()
+    mem = os.popen("vcgencmd get_mem arm").readline()
+    
+    for linha in os.popen("df -h /home/pi"):
+        linha = linha    
+        
+    temp = temp.split("=")[1]
+    temp = temp.split(".")[0]    
+    
+    print("temperatura cpu",temp)
+    dados = {"temperatura":temp}    
+
+    return dados
 
 @app.route('/',methods=['GET', 'POST'])
 def index():
@@ -189,256 +212,200 @@ def index():
     return render_template( 'pages/index.html', temperatura=temperatura, ip = ip1,
                             espaco = espaco, memoria = memoria)
 
+
+@app.route('/atualiza',methods=['GET'])
+def atualiza():
+        
+    temp = os.popen("vcgencmd measure_temp").readline()
+    mem = os.popen("vcgencmd get_mem arm").readline()
+    
+    for linha in os.popen("df -h /home/pi"):
+        linha = linha    
+        
+    temp = temp.split("=")[1]
+    temp = temp.split(".")[0]
+
+    temp = os.popen("vcgencmd measure_temp").readline()
+    mem = os.popen("vcgencmd get_mem arm").readline()
+    
+    for linha in os.popen("df -h /home/pi"):
+        linha = linha    
+        
+    temp = temp.split("=")[1]
+    temp = temp.split(".")[0] 
+    
+    temperatura = temp   
+
+    dados = {"temperatura": temperatura}
+
+    return dados
+
 @app.route('/reles',methods=['GET', 'POST'])
 def reles():
-
+    
     r = request.args
+    print("Argumentos recebidos",r)
+        
+    if "switch1_on" in r:           
+        rele.rele1_on()
+        session['rele1'] = True 
+    if 'switch1_off' in r:        
+        rele.rele1_off()
+        session['rele1'] = False
 
-    saidaA = 0b00000000  # Zera as saidas do port A (saidas do rele 1 ao rele 8 )
-    saidaB = 0b00000000  # Zera as saidas do port B (saidas dos reles 9 e 10 e dos transistors 11,12,13)
+    if "switch2_on" in r:           
+        rele.rele2_on()
+    if 'switch10_off' in r:        
+        rele.rele2_off()
+
+    if "switch3_on" in r:           
+        rele.rele3_on() 
+    if 'switch3_off' in r:        
+        rele.rele3_off()
+
+    if "switch4_on" in r:           
+        rele.rele4_on() 
+    if 'switch4_off' in r:        
+        rele.rele4_off()
+
+    if "switch5_on" in r:           
+        rele.rele5_on()
+    if 'switch5_off' in r:        
+        rele.rele5_off()
+
+    if "switch6_on" in r:           
+        rele.rele6_on()
+    if 'switch6_off' in r:        
+        rele.rele6_off()
+
+    if "switch7_on" in r:           
+        rele.rele7_on()
+    if 'switch7_off' in r:        
+        rele.rele7_off()
+
+    if "switch8_on" in r:           
+        rele.rele8_on() 
+    if 'switch8_off' in r:        
+        rele.rele8_off()
+
+    if "switch9_on" in r:           
+        rele.rele9_on()
+    if 'switch9_off' in r:        
+        rele.rele9_off()
+
+    if "switch10_on" in r:           
+        rele.rele10_on() 
+    if 'switch10_off' in r:        
+        rele.rele10_off()
+
+    if "switch11_on" in r:           
+        rele.rele11_on() 
+    if 'switch11_off' in r:        
+        rele.rele11_off()
+
+    if "switch12_on" in r:           
+        rele.rele12_on()
+    if 'switch12_off' in r:        
+        rele.rele12_off()    
+        
+    if "switch13_on" in r:         
+        rele.rele13_on() 
+    if 'switch13_off' in r:        
+        rele.rele13_off() 
 
     if "rele1" in r:
-
-        print("Acionando rele1 ")        
-        saidaA = saidaA + 0b00000001  # aciona rele 1 (abre portão social)
-        bus.write_byte_data(MCP23017, 0x014, saidaA)
-        time.sleep(1)
-        saidaA = saidaA - 0b00000001  # aciona rele 1 (abre portão social)
-        bus.write_byte_data(MCP23017, 0x014, saidaA)
+        rele.rele1_on()     
+        time.sleep(2)
+        rele.rele1_off()
+        # session['rele1'] = False 
 
     if "rele2" in r:
-
-        print("Acionando rele2 ")  
-        saidaA = saidaA + 0b00000010  # aciona rele 2 (abre portão eclusa)
-        bus.write_byte_data(MCP23017, 0x014, saidaA)
-        time.sleep(1)
-        saidaA = saidaA - 0b00000010  # aciona rele 2 (abre portão eclusa)
-        bus.write_byte_data(MCP23017, 0x014, saidaA)
+        rele.rele2_on()     
+        time.sleep(2)
+        rele.rele2_off() 
 
     if "rele3" in r:
-
-        print("Acionando rele3 ")  
-        saidaA = saidaA + 0b00000100  # aciona rele 3 (FOTO portão social)
-        bus.write_byte_data(MCP23017, 0x014, saidaA)
-        time.sleep(1)
-        saidaA = saidaA - 0b00000100  # aciona rele 3 (FOTO portão social)
-        bus.write_byte_data(MCP23017, 0x014, saidaA)
-
+        rele.rele3_on()     
+        time.sleep(2)
+        rele.rele3_off() 
 
     if "rele4" in r:
+        rele.rele4_on()     
+        time.sleep(2)
+        rele.rele4_off() 
 
-        print("Acionando rele4 ")  
-        saidaA = saidaA + 0b00001000  # aciona rele 4 (FOTO portão eclusa)
-        bus.write_byte_data(MCP23017, 0x014, saidaA)
-        time.sleep(1)
-        saidaA = saidaA - 0b00001000  # aciona rele 4 (FOTO portão eclusa)
-        bus.write_byte_data(MCP23017, 0x014, saidaA)
-        
-
-    if "rele5" in r:
-
-        print("Acionando rele5 ")  
-        saidaA = saidaA + 0b00010000   # aciona rele 5
-        bus.write_byte_data(MCP23017, 0x014, saidaA)
-        time.sleep(1)
-        saidaA = saidaA - 0b00010000  
-        bus.write_byte_data(MCP23017, 0x014, saidaA)
-
+    if "rele5" in r:        
+        rele.rele5_on()     
+        time.sleep(2)
+        rele.rele5_off()
         
     if "rele6" in r:
-
-        print("Acionando rele6 ")  
-        saidaA = saidaA + 0b00100000   # aciona rele 6
-        bus.write_byte_data(MCP23017, 0x014, saidaA)
-        time.sleep(1)
-        saidaA = saidaA - 0b00100000  
-        bus.write_byte_data(MCP23017, 0x014, saidaA)
-        
+        rele.rele6_on()     
+        time.sleep(2)
+        rele.rele6_off()
 
     if "rele7" in r:
-
-        print("Acionando rele7 ")  
-        saidaA = saidaA + 0b01000000   # aciona rele 7
-        bus.write_byte_data(MCP23017, 0x014, saidaA)
-        time.sleep(1)
-        saidaA = saidaA - 0b01000000  
-        bus.write_byte_data(MCP23017, 0x014, saidaA)
-        
+        rele.rele7_on()     
+        time.sleep(2)
+        rele.rele7_off()
 
     if "rele8" in r:
-
-        print("Acionando rele8 ")  
-        saidaA = saidaA + 0b10000000  # aciona rele 8
-        bus.write_byte_data(MCP23017, 0x014, saidaA)
-        time.sleep(1)
-        saidaA = saidaA - 0b10000000  
-        bus.write_byte_data(MCP23017, 0x014, saidaA)
-
+        rele.rele8_on()     
+        time.sleep(2)
+        rele.rele8_off() 
 
     if "rele9" in r:
-
-        print("Acionando rele9 ")          
-        saidaB = saidaB + 0b00000001  # aciona rele 9 
-        bus.write_byte_data(MCP23017, 0x015, saidaB)
-        time.sleep(1)
-        saidaB = saidaB - 0b00000001  
-        bus.write_byte_data(MCP23017, 0x015, saidaB)
-        
+        rele.rele9_on()     
+        time.sleep(2)
+        rele.rele9_off() 
 
     if "rele10" in r:
-
-        print("Acionando rele10 ")  
-        saidaB = saidaB + 0b00000010  # aciona rele 10 
-        bus.write_byte_data(MCP23017, 0x015, saidaB)
-        time.sleep(1)
-        saidaB = saidaB - 0b00000010 
-        bus.write_byte_data(MCP23017, 0x015, saidaB)   
+        rele.rele10_on()     
+        time.sleep(2)
+        rele.rele10_off()    
 
     if "rele11" in r:
-
-        print("Acionando transistor 1 ")  
-        saidaB = saidaB + 0b00000100  # liga LED AZUL saida GPB3
-        bus.write_byte_data(MCP23017, 0x015, saidaB)
-        time.sleep(1)
-        saidaB = saidaB - 0b00000100  
-        bus.write_byte_data(MCP23017, 0x015, saidaB)        
-
+        rele.rele11_on()     
+        time.sleep(2)
+        rele.rele11_off()
 
     if "rele12" in r:
-
-        print("Acionando transistor 2 ")  
-        saidaB = saidaB + 0b00001000  # desliga LED VERMELHO saida GPB3
-        bus.write_byte_data(MCP23017, 0x015, saidaB)
-        time.sleep(1)
-        saidaB = saidaB - 0b00001000  
-        bus.write_byte_data(MCP23017, 0x015, saidaB)
-        
+        rele.rele12_on()     
+        time.sleep(2)
+        rele.rele12_off()         
 
     if "rele13" in r:
-
-        print("Acionando transistor 3 ")          
-        saidaB = saidaB + 0b00010000  # liga cooler
-        bus.write_byte_data(MCP23017, 0x015, saidaB)
-        time.sleep(1)
-        saidaB = saidaB - 0b00010000  
-        bus.write_byte_data(MCP23017, 0x015, saidaB)     
-        
+        rele.rele13_on()     
+        time.sleep(2)
+        rele.rele13_off() 
     
-    if "teste_reles" in r:
-    
-        print("Acionando saidas dos reles")
-        
+       
+    dados = {"rele1" : "ok"}
+                # "rele2" : rele2,
+                # "rele3" : rele3,
+                # "rele4" : rele4,
+                # "rele5" : rele5,
+                # "rele6" : rele6,
+                # "rele7" : rele7,
+                # "rele8" : rele8,
+                # "rele9" : rele9,
+                # "rele10" : rele10,
+                # "rele11" : rele11,
+                # "rele12" : rele12,
+                # "rele13" : rele13,
+                # "rele1" : rele1,
+                # "rele1" : rele1,
+                # "rele1" : rele1,
+                # "rele1" : rele1,
+                # "rele1" : rele1,
+                # "temperatura" : temperatura,
+                # "espaco" : espaco,
+                # "memoria" : memoria                 
+                #  }
 
-        bus.write_byte_data(MCP23017, 0x015, 0)  # Zera saidas do port B
-        bus.write_byte_data(MCP23017, 0x014, 0)  # Coloca todas as saidas do PORT A em 0
+    return dados
 
-        
-        saidaA = saidaA + 0b00000001  # aciona rele 1 (abre portão social)
-        bus.write_byte_data(MCP23017, 0x014, saidaA)
-        time.sleep(1)
-        saidaA = saidaA - 0b00000001  # aciona rele 1 (abre portão social)
-        bus.write_byte_data(MCP23017, 0x014, saidaA)
-
-        time.sleep(1)
-
-        saidaA = saidaA + 0b00000010  # aciona rele 2 (abre portão eclusa)
-        bus.write_byte_data(MCP23017, 0x014, saidaA)
-        time.sleep(1)
-        saidaA = saidaA - 0b00000010  # aciona rele 2 (abre portão eclusa)
-        bus.write_byte_data(MCP23017, 0x014, saidaA)
-        
-        time.sleep(1)
-
-        saidaA = saidaA + 0b00000100  # aciona rele 3 (FOTO portão social)
-        bus.write_byte_data(MCP23017, 0x014, saidaA)
-        time.sleep(1)
-        saidaA = saidaA - 0b00000100  # aciona rele 3 (FOTO portão social)
-        bus.write_byte_data(MCP23017, 0x014, saidaA)
-
-        time.sleep(1)
-
-        saidaA = saidaA + 0b00001000  # aciona rele 4 (FOTO portão eclusa)
-        bus.write_byte_data(MCP23017, 0x014, saidaA)
-        time.sleep(1)
-        saidaA = saidaA - 0b00001000  # aciona rele 4 (FOTO portão eclusa)
-        bus.write_byte_data(MCP23017, 0x014, saidaA)
-
-        time.sleep(1)   
-
-        saidaA = saidaA + 0b00010000   # aciona rele 5
-        bus.write_byte_data(MCP23017, 0x014, saidaA)
-        time.sleep(1)
-        saidaA = saidaA - 0b00010000  
-        bus.write_byte_data(MCP23017, 0x014, saidaA)
-
-        time.sleep(1)
-
-        saidaA = saidaA + 0b00100000   # aciona rele 6
-        bus.write_byte_data(MCP23017, 0x014, saidaA)
-        time.sleep(1)
-        saidaA = saidaA - 0b00100000  
-        bus.write_byte_data(MCP23017, 0x014, saidaA)
-
-        time.sleep(1)
-
-        saidaA = saidaA + 0b01000000   # aciona rele 7
-        bus.write_byte_data(MCP23017, 0x014, saidaA)
-        time.sleep(1)
-        saidaA = saidaA - 0b01000000  
-        bus.write_byte_data(MCP23017, 0x014, saidaA)
-
-        time.sleep(1)
-
-        saidaA = saidaA + 0b10000000  # aciona rele 8
-        bus.write_byte_data(MCP23017, 0x014, saidaA)
-        time.sleep(1)
-        saidaA = saidaA - 0b10000000  
-        bus.write_byte_data(MCP23017, 0x014, saidaA)
-
-        time.sleep(1)
-
-        saidaB = saidaB + 0b00000001  # aciona rele 9 
-        bus.write_byte_data(MCP23017, 0x015, saidaB)
-        time.sleep(1)
-        saidaB = saidaB - 0b00000001  
-        bus.write_byte_data(MCP23017, 0x015, saidaB)
-
-        time.sleep(1)
-
-        saidaB = saidaB + 0b00000010  # aciona rele 10 
-        bus.write_byte_data(MCP23017, 0x015, saidaB)
-        time.sleep(1)
-        saidaB = saidaB - 0b00000010 
-        bus.write_byte_data(MCP23017, 0x015, saidaB)   
-
-        time.sleep(1)
-
-        saidaB = saidaB + 0b00000100  # liga LED AZUL saida GPB3
-        bus.write_byte_data(MCP23017, 0x015, saidaB)
-        time.sleep(1)
-        saidaB = saidaB - 0b00000100  
-        bus.write_byte_data(MCP23017, 0x015, saidaB)
-
-        time.sleep(1)
-
-        saidaB = saidaB + 0b00001000  # desliga LED VERMELHO saida GPB3
-        bus.write_byte_data(MCP23017, 0x015, saidaB)
-        time.sleep(1)
-        saidaB = saidaB - 0b00001000  
-        bus.write_byte_data(MCP23017, 0x015, saidaB)
-
-        time.sleep(1)
-
-        saidaB = saidaB + 0b00010000  # liga cooler
-        bus.write_byte_data(MCP23017, 0x015, saidaB)
-        time.sleep(1)
-        saidaB = saidaB - 0b00010000  
-        bus.write_byte_data(MCP23017, 0x015, saidaB)     
-
-        return redirect(url_for('index'))
-
-    return redirect(url_for('index'))
-    
+       
     
 @app.route('/', defaults={'path': 'index_original.html'})
 @app.route('/<path>')
