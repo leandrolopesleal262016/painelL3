@@ -44,15 +44,6 @@ bus.write_byte_data(MCP23017, 0x01, 0x00)  # defina todo GPB como saida 0x01
 
 rele = Reles()
 
-# class Inicia_ports:
-
-#     def __init__(self):
-                
-#         self.saidaA = 0b00000000  # Zera as saidas do port A (saidas do rele 1 ao rele 8 )
-#         self.saidaB = 0b00000000  # Zera as saidas do port B (saidas dos reles 9 e 10 e dos transistors 11,12,13)
-
-# inicia = Inicia_ports()
-
 # provide login manager with load_user callback
 @lm.user_loader
 def load_user(user_id):
