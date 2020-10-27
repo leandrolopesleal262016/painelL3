@@ -221,17 +221,34 @@ class Reles():
 
         self.saidaA = 0b00000000  # Zera as saidas do port A (saidas do rele 1 ao rele 8 )
         self.saidaB = 0b00000000  # Zera as saidas do port B (saidas dos reles 9 e 10 e dos transistors 11,12,13)
-
+        self.rele1 = 0
+        self.rele2 = 0
+        self.rele3 = 0
+        self.rele4 = 0
+        self.rele5 = 0
+        self.rele6 = 0
+        self.rele7 = 0
+        self.rele8 = 0
+        self.rele9 = 0
+        self.rele10 = 0
+        self.rele11 = 0
+        self.rele12 = 0
+        self.rele13 = 0
+        
         bus.write_byte_data(MCP23017, 0x015, 0)  # Zera saidas do port B
         bus.write_byte_data(MCP23017, 0x014, 0)  # Coloca todas as saidas do PORT A em 0
    
     def rele1_on(self):
-        self.saidaA = self.saidaA + 0b00000001  # aciona rele 1
-        bus.write_byte_data(MCP23017, 0x014, self.saidaA)
+        if self.rele1 == 0:
+            self.saidaA = self.saidaA + 0b00000001  # aciona rele 1
+            bus.write_byte_data(MCP23017, 0x014, self.saidaA)
+            self.rele1 = 1
 
-    def rele1_off(self):        
-        self.saidaA = self.saidaA - 0b00000001  # desaciona rele 1
-        bus.write_byte_data(MCP23017, 0x014, self.saidaA)
+    def rele1_off(self):
+        if self.rele1 == 1:        
+            self.saidaA = self.saidaA - 0b00000001  # desliga rele 1
+            bus.write_byte_data(MCP23017, 0x014, self.saidaA)
+            self.rele1 = 0
 
     def rele2_on(self):
         self.saidaA = self.saidaA + 0b00000010  # aciona rele 2 

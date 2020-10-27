@@ -246,7 +246,7 @@ def reles():
 
     if "switch2_on" in r:           
         rele.rele2_on()
-    if 'switch10_off' in r:        
+    if 'switch2_off' in r:        
         rele.rele2_off()
 
     if "switch3_on" in r:           
@@ -368,7 +368,11 @@ def reles():
     if "rele13" in r:
         rele.rele13_on()     
         time.sleep(2)
-        rele.rele13_off() 
+        rele.rele13_off()
+
+    if "reiniciar" in r:
+        print("REINICIANDO O SISTEMA...")
+        os.system("sudo reboot now") 
     
        
     dados = {"rele1" : "ok"}
